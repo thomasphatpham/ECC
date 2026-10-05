@@ -64,6 +64,7 @@ Options:
                       when the selected profile/modules materialize hooks)
   --no-hooks          Install everything except the automatic hook runtime
   --dry-run    Show the install plan without copying files
+  --quiet, -q  Print only completion status without file lists
   --json       Emit machine-readable plan/result JSON
   --help       Show this help text
 
@@ -184,6 +185,8 @@ async function main() {
       const plan = previewInstallPlan(rawPlan);
       if (options.json) {
         console.log(JSON.stringify({ dryRun: true, plan }, null, 2));
+      } else if (options.quiet) {
+        console.log('✔ Done!');
       } else {
         printHumanPlan(plan, true);
       }
@@ -204,6 +207,8 @@ async function main() {
     };
     if (options.json) {
       console.log(JSON.stringify({ dryRun: false, result }, null, 2));
+    } else if (options.quiet) {
+      console.log('✔ Done!');
     } else {
       printHumanPlan(result, false);
     }

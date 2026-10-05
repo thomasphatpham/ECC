@@ -31,6 +31,7 @@ function parseInstallArgs(argv) {
     locale: null,
     enableHooks: false,
     noHooks: false,
+    quiet: false,
   };
 
   for (let index = 0; index < args.length; index += 1) {
@@ -77,6 +78,8 @@ function parseInstallArgs(argv) {
       parsed.noHooks = true;
     } else if (arg === '--dry-run') {
       parsed.dryRun = true;
+    } else if (arg === '--quiet' || arg === '-q') {
+      parsed.quiet = true;
     } else if (arg === '--json') {
       parsed.json = true;
     } else if (arg === '--help' || arg === '-h') {
